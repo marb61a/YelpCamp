@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        YelpCamp
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if(!currenetUser) { %>
+                            <li>
+                                <a href="/login">Login</a> 
+                            </li>
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                        <% else %>
+                            <li>
+                                <a href="">Signed In As <%= currentUser.username%></a>
+                            </li>
+                            <li>
+                                <li><a href="/logout">Logout</a></li>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
