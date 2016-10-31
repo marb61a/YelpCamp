@@ -38,3 +38,19 @@ router.post("/login", passport.authenticate("local",
         failureRedirect: "/login"
     }), function(req, res){
     });
+
+// Logout Route
+router.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/campgrounds");
+});
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    
+    res.redirect("/login");
+}
+
+module.exports = router;

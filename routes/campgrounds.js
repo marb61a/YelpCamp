@@ -42,3 +42,23 @@ router.post('/', function(req, res){
         }
     });
 });
+
+// Show form to create Campground
+router.get("/new", isLoggedIn, function(req, res){
+    res.render("campgrounds/new.ejs");
+});
+
+
+// Show more information about a campground
+router.get("/:id", isLoggedIn, function(req, res) {
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(foundCampground);
+            res.render("campgrounds/show", {campground: foundCampground});
+        }
+    });
+});
+
+module.exports = router;
