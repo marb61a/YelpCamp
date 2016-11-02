@@ -15,6 +15,32 @@ router.get('/new', isLoggedIn, function(req, res){
     });
 });
 
+// Create Comments
+router.post('/', isLoggedIn, function(req, res){
+    // Lookup campgrounds using the ID
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err);
+            res.redirect('/campgrounds');
+        } else {
+            Comment.create(req.body.comment, function(err, comment){
+                if(err){
+                    console.log(err);
+                } else {
+                    // Add a usermane and an ID to comments
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    // Save the comment
+                    comment.save();
+                    campground.comments.push(comment);
+                    campground.save();
+                    console.log(comment);
+                    res.redirect('/campgrounds/' + campground._id);
+                } 
+            });
+        }    
+    });
+});
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()) {
