@@ -21,7 +21,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
     }
 };
 
-middlewareObj.checkCampsiteOwnership = function(req, res, next){
+middlewareObj.checkCampgroundOwnership = function(req, res, next){
     // Check if user authenticated prior to campsite ownership check
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, foundCamp){
